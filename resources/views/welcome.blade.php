@@ -9,9 +9,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased bg-[#0a0a0a] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-gray-700 selection:text-white overflow-hidden">
-        
+
         <main class="w-full max-w-md px-6 py-12 text-center relative z-10">
-            
+
             <!-- Hero Avatar -->
             <div class="relative mx-auto mb-6 w-24 h-24 sm:w-32 sm:h-32">
                 <div class="rounded-full overflow-hidden w-full h-full ring-2 ring-gray-800">
@@ -23,13 +23,12 @@
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
                 Jason Torres
             </h1>
-            <p class="text-base text-gray-400 font-medium mb-6">
+            <p class="text-base text-gray-400 font-medium mb-8">
                 Community Manager, Developer Advocate, Filmmaker
             </p>
-            <a href="/tutorial" class="text-gray-600 hover:text-white text-xs transition-colors">How I built this</
 
             <!-- Social Links -->
-            <div class="flex justify-center space-x-5">
+            <div class="flex justify-center space-x-5 mb-8">
                 <!-- GitHub -->
                 <a href="https://github.com/jasonetorres" class="text-gray-400 hover:text-white transition-colors duration-200">
                     <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,13 +54,15 @@
                     </svg>
                 </a>
             </div>
+            <div><a href="/tutorial" class="text-base text-gray-400 hover:text-white font-medium mb-8 transition-colors">How I built this</a></div>
+            <div><a href="/aiblog" class="text-base text-gray-400 hover:text-white font-medium mb-8 transition-colors">The Tech Conference That Wasn't Selling Anything</a></div>
+
 
         </main>
 
         <footer class="absolute bottom-6 w-full text-center z-0">
             <div class="flex flex-col items-center space-y-2">
-                <a href="/tutorial" class="text-gray-600 hover:text-white text-xs transition-colors">How I built this</a>
-                <p class="text-gray-500 text-xs">&copy; {{ date('Y') }} Jason Torres. All rights reserved.</p>
+                <p class="text-gray-400 text-xs">&copy; {{ date('Y') }} Jason Torres. All rights reserved.</p>
             </div>
         </footer>
 
