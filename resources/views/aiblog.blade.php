@@ -32,7 +32,7 @@
             <h1
                 class="text-4xl sm:text-5xl font-extrabold text-white mb-8 tracking-tight leading-tight"
             >
-                The Tech Conference That Wasn't Selling Anything: My Key Takeaways from Flower City AI 💡
+                The Tech Conference That Wasn't Selling Anything: My Key Takeaways from Flower City AI
             </h1>
 
             <!-- IMAGE 1: After Title -->
