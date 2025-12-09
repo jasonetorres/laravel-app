@@ -22,7 +22,7 @@
         <article>
             <header class="mb-16">
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-8 tracking-tight leading-tight">
-                    How to Build & Deploy a Simple Laravel Portfolio
+                    How to Build & Deploy a Simple Laravel Portfolio, LIKE A BOSS
                 </h1>
                 <p class="text-xl text-gray-400 leading-relaxed max-w-2xl border-l-4 border-indigo-500 pl-4 italic">
                     Hey there! Let's walk through creating a minimal, high-impact dark-themed portfolio page using **Laravel and Tailwind CSS**, and then deploy it to Laravel Cloud in minutes. No complex setups, just pure speed.
