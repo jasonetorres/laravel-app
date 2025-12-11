@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body class="antialiased bg-[#050505] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white overflow-y-scroll">
+<body class="antialiased bg-[#050505] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white ">
 
 <main class="w-full max-w-md px-6 py-12 text-center relative z-10 pb-24">
 
