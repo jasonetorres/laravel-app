@@ -27,9 +27,9 @@
         }
     </style>
 </head>
-<body class="antialiased bg-[#050505] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white overflow-hidden">
+<body class="antialiased bg-[#050505] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white overflow-y-scroll">
 
-<main class="w-full max-w-md px-6 py-12 text-center relative z-10">
+<main class="w-full max-w-md px-6 py-12 text-center relative z-10 pb-24">
 
     <div class="relative mx-auto mb-6 w-24 h-24 sm:w-32 sm:h-32">
         <div class="rounded-full overflow-hidden w-full h-full ring-4 ring-[#111] shadow-2xl">
@@ -61,7 +61,7 @@
 
     <div
         x-data="{ activeTab: 'writing' }"
-        class="w-full max-w-2xl mx-auto rounded-xl overflow-hidden bg-[#111] border border-white/10 shadow-2xl shadow-indigo-500/20"
+        class="w-full max-w-2xl mx-auto rounded-xl overflow-hidden mb-10 bg-[#111] border border-white/10 shadow-2xl shadow-indigo-500/20"
     >
         <div class="flex items-center px-2 py-2 bg-[#161616] border-b border-white/5">
             <div class="hidden sm:flex space-x-2 px-4">
@@ -216,7 +216,8 @@
 
 </main>
 
-<footer class="fixed bottom-6 w-full text-center z-0 pointer-events-none">
+
+<footer class=" bottom-6 w-full text-center z-0 pointer-events-none">
     <div class="flex flex-col items-center space-y-2">
         <p class="text-zinc-700 text-xs">&copy; {{ date('Y') }} Jason Torres.</p>
     </div>
