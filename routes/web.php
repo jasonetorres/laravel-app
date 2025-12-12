@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
-
+// --- 1. HOMEPAGE ROUTE (Fetches Hashnode Posts & YouTube Videos) ---
 Route::get('/', function () {
 
     //  FETCH HASHNODE POSTS
@@ -39,7 +39,8 @@ Route::get('/', function () {
     $channelId = env('YOUTUBE_CHANNEL_ID');
 
     if ($apiKey && $channelId) {
-
+        // Convert Channel ID (UC...) to Uploads Playlist ID (UU...)
+        // We strip the first 2 characters ('UC') and replace them with 'UU'
         $uploadsPlaylistId = 'UU' . substr($channelId, 2);
 
         $youtubeResponse = Http::get('https://www.googleapis.com/youtube/v3/playlistItems', [
@@ -52,7 +53,7 @@ Route::get('/', function () {
         $videos = $youtubeResponse->json('items', []);
     }
 
-
+    //  RETURN VIEW WITH BOTH DATA SETS
     return view('welcome', [
         'posts' => $posts,
         'videos' => $videos
@@ -68,7 +69,7 @@ Route::get('/aiblog', function () {
     return view('aiblog');
 });
 
-// --- DYNAMIC SINGLE POST ROUTE ---
+// ---  DYNAMIC SINGLE POST ROUTE ---
 Route::get('/blog/{slug}', function ($slug) {
     $query = <<<'GQL'
     query GetPost($slug: String!, $host: String!) {
@@ -105,7 +106,7 @@ Route::get('/blog/{slug}', function ($slug) {
     return view('post', ['post' => $post]);
 });
 
-// --- 4. RSS FEED ROUTE ---
+// ---  RSS FEED ROUTE ---
 Route::get('/rss', function () {
     // 1. Fetch Posts (Reusing your existing pattern)
     $query = <<<'GQL'
