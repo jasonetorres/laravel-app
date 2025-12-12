@@ -115,15 +115,43 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Select all <pre> tags inside the content area
         const codeBlocks = document.querySelectorAll('.hashnode-content pre');
 
         codeBlocks.forEach(pre => {
-            // 1. Create the Main Terminal Container
+            let language = 'Terminal';
+            const codeElement = pre.querySelector('code');
+
+            // Gather all classes from <pre> and <code> into one string for easy searching
+            const classString = (pre.className + ' ' + (codeElement ? codeElement.className : '')).toLowerCase();
+
+            // Debugging: Uncomment this to see what classes your blog actually has in the browser console
+            // console.log('Found code block classes:', classString);
+
+            // Regex looks for 'language-xyz' OR 'lang-xyz'.
+            // It allows letters, numbers, +, #, and - (e.g., c++, c#, objective-c)
+            const match = classString.match(/(?:language|lang)-([a-z0-9+#-]+)/);
+
+            if (match && match[1]) {
+                language = match[1].toUpperCase();
+            } else {
+                // Fallback: If no "language-" prefix, check if it just has a bare language name
+                // mixed with hljs (common in some highlighters)
+                // Example: "hljs javascript"
+                const fallbackMatch = classString.match(/\bhljs\s+([a-z0-9+#-]+)/);
+                if (fallbackMatch && fallbackMatch[1]) {
+                    language = fallbackMatch[1].toUpperCase();
+                }
+            }
+
+            // Optional: Clean up common variations
+            if (language === 'JS') language = 'JAVASCRIPT';
+            if (language === 'TS') language = 'TYPESCRIPT';
+            if (language === 'SH') language = 'BASH';
+
+            // --- Wrapper Creation ---
             const wrapper = document.createElement('div');
             wrapper.className = "rounded-xl overflow-hidden bg-[#111] border border-white/10 shadow-2xl shadow-indigo-500/10 my-8 transform hover:scale-[1.01] transition-transform duration-300";
 
-            // 2. Create the Window Header (Red/Yellow/Green dots)
             const header = document.createElement('div');
             header.className = "flex items-center px-4 py-3 bg-[#161616] border-b border-white/5";
             header.innerHTML = `
@@ -133,23 +161,17 @@
                     <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
                 </div>
                 <div class="flex-1 text-center mr-12">
-                    <span class="text-xs text-zinc-500 font-medium font-mono">Code Snippet</span>
+                    <span class="text-xs text-zinc-500 font-medium font-mono">${language}</span>
                 </div>
             `;
 
-            // 3. Create the Content Container
             const contentDiv = document.createElement('div');
             contentDiv.className = "p-6 overflow-x-auto";
 
-            // 4. Style the original <pre> tag
             pre.className = "font-mono text-sm text-gray-300 leading-relaxed whitespace-pre";
 
-            // 5. Move elements around
-            // Insert the wrapper before the <pre> tag
             pre.parentNode.insertBefore(wrapper, pre);
-            // Move <pre> inside contentDiv
             contentDiv.appendChild(pre);
-            // Assemble wrapper
             wrapper.appendChild(header);
             wrapper.appendChild(contentDiv);
         });
