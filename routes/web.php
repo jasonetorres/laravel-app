@@ -140,6 +140,7 @@ Route::get('/rss', function () {
 
     // 2. Build XML Structure
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<?xml-stylesheet type="text/xsl" href="' . asset('rss.xsl') . '"?>' . "\n";
     $xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
     $xml .= '<channel>';
     $xml .= '<title>' . htmlspecialchars($siteTitle) . '</title>';
