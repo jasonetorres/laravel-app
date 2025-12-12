@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Jason Torres - Headless Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A personal portfolio and content hub built with **Laravel**. This project serves as a central aggregation point for my work, treating external platforms like **Hashnode** and **YouTube** as headless content sources.
 
-## About Laravel
+It features a custom "Terminal" aesthetic for code blocks, dynamic content fetching via GraphQL and REST APIs, and a tabbed interface powered by Alpine.js.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **Headless Blog Engine**: Fetches articles dynamically from [Hashnode](https://hashnode.com) using their GraphQL API. No local database storage for posts is required.
+-   **YouTube Integration**: Automatically retrieves the latest video uploads from a specific channel using the YouTube Data API.
+-   **Dynamic Tab Interface**: A lightweight, single-page-like experience for switching between "Writing," "Speaking," and "Streaming" sections using **Alpine.js**.
+-   **Custom Syntax Highlighting**: A vanilla JavaScript solution that transforms raw HTML `<pre>` tags into Mac-style "Terminal" windows with syntax highlighting.
+-   **Minimalist Design**: Built with Tailwind CSS, featuring a dark mode aesthetic (`bg-[#050505]`) and custom scrollbars.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠 Tech Stack
 
-## Learning Laravel
+-   **Framework**: [Laravel 12](https://laravel.com)
+-   **Frontend**: [Blade Templates](https://laravel.com/docs/blade), [Tailwind CSS](https://tailwindcss.com)
+-   **Interactivity**: [Alpine.js](https://alpinejs.dev)
+-   **APIs**:
+    -   Hashnode GraphQL API (for Blog Posts)
+    -   YouTube Data API v3 (for Video Streams)
+-   **Deployment**: Optimized for [Laravel Cloud](https://cloud.laravel.com)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## ⚙️ Installation & Setup
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/jasonetorres/laravel-app.git](https://github.com/jasonetorres/laravel-app.git)
+    cd laravel-app
+    ```
 
-## Laravel Sponsors
+2.  **Install PHP dependencies**
+    ```bash
+    composer install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3.  **Install Node dependencies & build assets**
+    ```bash
+    npm install
+    npm run build
+    ```
 
-### Premium Partners
+4.  **Environment Configuration**
+    Copy the example environment file and generate an application key:
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+5.  **Configure API Keys**
+    Add the following keys to your `.env` file to enable dynamic content fetching:
 
-## Contributing
+    ```env
+    # Required for the "Streaming" tab
+    YOUTUBE_API_KEY=your_google_cloud_api_key
+    YOUTUBE_CHANNEL_ID=your_channel_id_starts_with_UC
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    # Optional: Hashnode Host (defaults to film2code.vercel.app in code if not set)
+    # HASHNODE_HOST=yourwebsite.com
+    ```
 
-## Code of Conduct
+6.  **Run the local server**
+    ```bash
+    php artisan serve
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📂 Project Structure Highlights
 
-## Security Vulnerabilities
+-   **`routes/web.php`**: Handles the API logic.
+    -   Fetches Hashnode posts via `Http::post`.
+    -   Converts YouTube Channel IDs (`UC...`) to Playlist IDs (`UU...`) to fetch uploads efficiently.
+-   **`resources/views/welcome.blade.php`**: The main landing page containing the profile and the Alpine.js tab switcher.
+-   **`resources/views/post.blade.php`**: The single post view that renders the HTML content from Hashnode.
+-   **`resources/views/tutorial.blade.php`**: A detailed breakdown of how this portfolio was built.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🎨 Credits
 
-## License
+-   **Author**: Jason Torres
+-   **Design Inspiration**: Minimalist developer portfolios and dark-mode terminal aesthetics.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+&copy; Jason Torres. All rights reserved.
