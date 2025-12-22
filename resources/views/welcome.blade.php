@@ -108,7 +108,7 @@
                         Building Holiday Magic with AI: The 2025 Santa Tracker
                     </h3>
                     <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        Reflections on community over commerce and why the best events feel less like sales pitches.
+                        Resurrecting a family tradition with an 8-bit Santa Tracker powered by real-time AI voice orchestration.
                     </p>
                 </a>
 
