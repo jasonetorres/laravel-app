@@ -65,6 +65,10 @@ Route::get('/tutorial', function () {
     return view('tutorial');
 });
 
+Route::get('/santatracker', function () {
+    return view('santatracker');
+});
+
 Route::get('/aiblog', function () {
     return view('aiblog');
 });
