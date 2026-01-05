@@ -94,7 +94,7 @@ HUMAN_HEART: 100000_beats_pumping_life;</code></pre>
                 </h2>
                 <p class="mb-8 text-gray-400 leading-relaxed">
                     The year began with the preproduction of my new life. This all actually started last year when I
-                    started my job at Torque, but 2025 kicked off with a bang. We laid the groundwork for the Tech
+                    started my job at <strong>Torc</strong>, but 2025 kicked off with a bang. We laid the groundwork for the Tech
                     Commute—I scheduled 50+ episodes over the course of the year—and I hosted my first ever tech meetup
                     in Denver with the company <strong>Warp Terminal</strong>.
                 </p>
