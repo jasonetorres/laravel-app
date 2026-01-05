@@ -102,7 +102,14 @@
                  x-transition:enter-start="opacity-0 translate-y-2"
                  x-transition:enter-end="opacity-100 translate-y-0"
                  class="h-full overflow-y-auto pr-2 custom-scrollbar space-y-6 text-left">
-
+                <a href="/2025blog" class="block group">
+                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
+                        Freshman Year: My 2025 Debut in Tech
+                    </h3>
+                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
+                        People say a long career in film prepares you for a lot...
+                    </p>
+                </a>
                 <a href="/santatracker" class="block group">
                     <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
                         Building Holiday Magic with AI: The 2025 Santa Tracker
