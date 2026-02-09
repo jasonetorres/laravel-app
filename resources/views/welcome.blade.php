@@ -102,6 +102,8 @@
                  x-transition:enter-start="opacity-0 translate-y-2"
                  x-transition:enter-end="opacity-100 translate-y-0"
                  class="h-full overflow-y-auto pr-2 custom-scrollbar space-y-6 text-left">
+
+                {{-- STATIC LOCAL POSTS --}}
                 <a href="/2025blog" class="block group">
                     <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
                         Freshman Year: My 2025 Debut in Tech
@@ -159,6 +161,31 @@
                             </p>
                         </a>
                         <div class="h-px bg-white/10 w-full"></div>
+                    @endforeach
+                @endif
+
+                {{-- 2. LINKEDIN NEWSLETTER DYNAMIC POSTS --}}
+                @if(isset($linkedinPosts) && count($linkedinPosts) > 0)
+                    <div class="pt-4 mb-2">
+                        <h4 class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest opacity-50">LinkedIn: Musings of an Idiot</h4>
+                    </div>
+
+                    @foreach($linkedinPosts as $article)
+                        <a href="{{ $article['link'] }}" target="_blank" class="block group">
+                            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
+                                {{ $article['title'] }}
+                            </h3>
+                            <p class="text-zinc-500 mt-2 text-sm leading-relaxed line-clamp-2">
+                                {{ strip_tags($article['brief']) }}
+                            </p>
+                            <div class="flex items-center space-x-3 mt-2">
+                                <p class="text-xs text-zinc-600">
+                                    {{ \Carbon\Carbon::parse($article['date'])->format('M d, Y') }}
+                                </p>
+                                <span class="text-[9px] text-zinc-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/10">Newsletter</span>
+                            </div>
+                        </a>
+                        <div class="h-px bg-white/10 w-full my-4 last:hidden"></div>
                     @endforeach
                 @endif
 
