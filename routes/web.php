@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
-// --- 1. HOMEPAGE ROUTE (Fetches Hashnode Posts & YouTube Videos) ---
+// --- 1. HOMEPAGE ROUTE (Fetches Hashnode Posts, YouTube Videos, & LinkedIn Newsletter) ---
 Route::get('/', function () {
 
     //  FETCH HASHNODE POSTS
@@ -39,24 +39,40 @@ Route::get('/', function () {
     $channelId = env('YOUTUBE_CHANNEL_ID');
 
     if ($apiKey && $channelId) {
-        // Convert Channel ID (UC...) to Uploads Playlist ID (UU...)
-        // We strip the first 2 characters ('UC') and replace them with 'UU'
         $uploadsPlaylistId = 'UU' . substr($channelId, 2);
 
         $youtubeResponse = Http::get('https://www.googleapis.com/youtube/v3/playlistItems', [
             'part' => 'snippet',
             'playlistId' => $uploadsPlaylistId,
-            'maxResults' => 5, // Limit to 5 latest videos
+            'maxResults' => 5,
             'key' => $apiKey,
         ]);
 
         $videos = $youtubeResponse->json('items', []);
     }
 
-    //  RETURN VIEW WITH BOTH DATA SETS
+    //  FETCH LINKEDIN NEWSLETTER
+    $linkedinPosts = [];
+    $linkedinRssUrl = 'https://linkedinrss.cns.me/7414020052481413120';
+    $linkedinResponse = Http::get($linkedinRssUrl);
+
+    if ($linkedinResponse->successful()) {
+        $xml = simplexml_load_string($linkedinResponse->body());
+        foreach ($xml->channel->item as $item) {
+            $linkedinPosts[] = [
+                'title' => (string) $item->title,
+                'link'  => (string) $item->link,
+                'brief' => (string) $item->description,
+                'date'  => (string) $item->pubDate,
+            ];
+        }
+    }
+
+    //  RETURN VIEW WITH ALL DATA SETS
     return view('welcome', [
         'posts' => $posts,
-        'videos' => $videos
+        'videos' => $videos,
+        'linkedinPosts' => array_slice($linkedinPosts, 0, 5) // Display latest 5 editions
     ]);
 });
 
@@ -68,6 +84,7 @@ Route::get('/tutorial', function () {
 Route::get('/santatracker', function () {
     return view('santatracker');
 });
+
 Route::get('/2025blog', function () {
     return view('2025blog');
 });
@@ -115,7 +132,6 @@ Route::get('/blog/{slug}', function ($slug) {
 
 // ---  RSS FEED ROUTE ---
 Route::get('/rss', function () {
-    // 1. Fetch Posts (Reusing your existing pattern)
     $query = <<<'GQL'
     query GetPosts($host: String!) {
         publication(host: $host) {
@@ -145,7 +161,6 @@ Route::get('/rss', function () {
     $posts = $data['posts']['edges'] ?? [];
     $siteTitle = $data['title'] ?? 'Jason Torres Portfolio';
 
-    // 2. Build XML Structure
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
     $xml .= '<?xml-stylesheet type="text/xsl" href="' . asset('rss.xsl') . '"?>' . "\n";
     $xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
@@ -173,6 +188,5 @@ Route::get('/rss', function () {
     $xml .= '</channel>';
     $xml .= '</rss>';
 
-    // 3. Return XML Response
     return response($xml, 200, ['Content-Type' => 'application/xml']);
 });
