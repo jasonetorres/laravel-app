@@ -104,6 +104,14 @@
                  class="h-full overflow-y-auto pr-2 custom-scrollbar space-y-6 text-left">
 
                 {{-- STATIC LOCAL POSTS --}}
+                <a href="/fullcircle" class="block group">
+                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
+                        The Architecture of a Year: Why I Built FullCircle
+                    </h3>
+                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
+                        Time is our only non-renewable resource. I realized that.....
+                    </p>
+                </a>
                 <a href="/2025blog" class="block group">
                     <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
                         Freshman Year: My 2025 Debut in Tech

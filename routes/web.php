@@ -92,6 +92,9 @@ Route::get('/2025blog', function () {
 Route::get('/aiblog', function () {
     return view('aiblog');
 });
+Route::get('/fullcircle', function () {
+    return view('fullcircle');
+});
 
 // ---  DYNAMIC SINGLE POST ROUTE ---
 Route::get('/blog/{slug}', function ($slug) {
