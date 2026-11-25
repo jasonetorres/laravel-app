@@ -58,8 +58,7 @@ button:focus-visible {
 
 .entry-link:hover h3,
 .entry-link:focus-visible h3 {
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
+    color: #f6c453;
 }
 
 @media (prefers-reduced-motion: no-preference) {

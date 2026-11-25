@@ -130,7 +130,7 @@
                                 <span class="text-glow">{{ $item['role'] ?? 'Featured' }}</span>
                                 <time datetime="{{ $item['date'] }}">{{ $item['date_label'] }}</time>
                             </div>
-                            <h3 class="mt-3 text-lg font-medium leading-snug text-white">{{ $item['title'] }}</h3>
+                            <h3 class="mt-3 text-lg font-medium leading-normal text-white">{{ $item['title'] }}</h3>
                             <p class="mt-2 text-sm leading-relaxed text-mist">{{ $item['source'] }}</p>
                             @if (! empty($item['summary']))
                                 <p class="mt-2 text-sm leading-relaxed text-faint">{{ $item['summary'] }}</p>
