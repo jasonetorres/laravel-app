@@ -6,6 +6,92 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --color-ink: #08090c;
+    --color-glow: #f6c453;
+    --color-mist: #d5d6de;
+    --color-faint: #b4b6c2;
+}
+
+:root {
+    color-scheme: dark;
+}
+
+body {
+    background-color: var(--color-ink);
+    background-image:
+        radial-gradient(900px 420px at 0% -10%, rgba(246, 196, 83, 0.14), transparent 55%),
+        radial-gradient(680px 380px at 100% 0%, rgba(150, 176, 255, 0.08), transparent 50%);
+    background-attachment: fixed;
+}
+
+::selection {
+    background: #f6c453;
+    color: #08090c;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 50;
+    transform: translateY(-160%);
+    border-radius: 0.5rem;
+    background: #f6c453;
+    color: #08090c;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.skip-link:focus {
+    transform: none;
+    outline: 2px solid #08090c;
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #f6c453;
+    outline-offset: 3px;
+}
+
+.entry-link:hover h3,
+.entry-link:focus-visible h3 {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .rise {
+        animation: rise 0.55s ease both;
+    }
+
+    .card-lift {
+        transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .card-lift:hover {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rise,
+    .card-lift {
+        animation: none;
+        transition: none;
+    }
 }

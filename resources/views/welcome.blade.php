@@ -3,276 +3,235 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jason Torres | Developer</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <title>{{ $profile['name'] }} | Developer Advocate at JetBrains</title>
+    <meta name="description" content="Jason Torres is a Developer Advocate at JetBrains, a live streamer, and a filmmaker. Talks, writing, and videos.">
+    <meta name="author" content="Jason Torres">
+    <meta name="theme-color" content="#08090c">
+    <link rel="canonical" href="{{ url('/') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Jason Torres">
+    <meta property="og:title" content="Jason Torres | Developer Advocate at JetBrains">
+    <meta property="og:description" content="Developer Advocate at JetBrains. Live streamer and filmmaker. Talks, writing, and videos.">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:image" content="{{ url($profile['photo']) }}">
+    <meta property="og:image:alt" content="{{ $profile['photo_alt'] }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Jason Torres | Developer Advocate at JetBrains">
+    <meta name="twitter:description" content="Developer Advocate at JetBrains. Live streamer and filmmaker. Talks, writing, and videos.">
+    <meta name="twitter:image" content="{{ url($profile['photo']) }}">
+    <meta name="twitter:image:alt" content="{{ $profile['photo_alt'] }}">
+    <link rel="alternate" type="application/rss+xml" title="Jason Torres" href="{{ url('/rss') }}">
+    @include('partials.fonts')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #111;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #444;
-        }
-    </style>
+    <script type="application/ld+json">
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            'name' => $profile['name'],
+            'jobTitle' => 'Developer Advocate',
+            'worksFor' => ['@type' => 'Organization', 'name' => 'JetBrains'],
+            'url' => url('/'),
+            'image' => url($profile['photo']),
+            'email' => $profile['email'],
+            'homeLocation' => ['@type' => 'Place', 'name' => $profile['location']],
+            'sameAs' => [
+                'https://github.com/jasonetorres',
+                'https://www.linkedin.com/in/thejasontorres',
+                'https://www.linkedin.com/newsletters/musings-of-an-idiot-7414020052481413120/',
+                'https://x.com/TasonJorres',
+                'https://www.youtube.com/@TheJasonTorres',
+                'https://thejasontorres.com/',
+                'https://lookatmyboyjason.com/',
+                'https://film2code.vercel.app',
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+    </script>
 </head>
-<body class="antialiased bg-[#050505] text-white font-sans min-h-screen flex flex-col items-center justify-center selection:bg-indigo-500 selection:text-white ">
+<body class="min-h-screen bg-ink font-sans text-mist antialiased">
+    <a class="skip-link" href="#content">Skip to content</a>
 
-<main class="w-full max-w-md px-6 py-12 text-center relative z-10 pb-24">
-
-    <div class="relative mx-auto mb-6 w-24 h-24 sm:w-32 sm:h-32">
-        <div class="rounded-full overflow-hidden w-full h-full ring-4 ring-[#111] shadow-2xl">
-            <img src="/images/jasont.jpg" alt="Jason Torres" class="w-full h-full object-cover">
+    <header class="sticky top-0 z-20 border-b border-white/10 bg-ink/85 backdrop-blur-md">
+        <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3 sm:px-8">
+            <a href="{{ url('/') }}" class="rounded-sm text-sm font-medium text-white outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow">
+                Jason Torres
+            </a>
+            <nav aria-label="On this page" class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                <a class="rounded-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow" href="#featured">Featured</a>
+                <a class="rounded-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow" href="#talks">Talks</a>
+                <a class="rounded-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow" href="#writing">Writing</a>
+                <a class="rounded-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow" href="#videos">Videos</a>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <h1 class="text-3xl font-bold tracking-tight text-white mb-2">
-        Jason Torres
-    </h1>
-    <p class="text-base text-zinc-500 font-medium mb-6">
-        Community Manager, Developer Advocate, Filmmaker
-    </p>
-
-    <div class="flex justify-center space-x-6 mb-10">
-        <a href="https://github.com/jasonetorres" class="text-zinc-500 hover:text-white transition-colors duration-200">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/thejasontorres/" class="text-zinc-500 hover:text-white transition-colors duration-200">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" /></svg>
-        </a>
-        <a href="https://x.com/TasonJorres" class="text-zinc-500 hover:text-white transition-colors duration-200">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-        </a>
-        <a href="mailto:jasontorres585@icloud.com" class="text-zinc-500 hover:text-white transition-colors duration-200">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-        </a>
-    </div>
-
-    <div
-        x-data="{ activeTab: 'writing' }"
-        class="w-full max-w-2xl mx-auto rounded-xl overflow-hidden mb-10 bg-[#111] border border-white/10 shadow-2xl shadow-indigo-500/20"
-    >
-        <div class="flex items-center px-2 py-2 bg-[#161616] border-b border-white/5">
-            <div class="hidden sm:flex space-x-2 px-4">
-                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-            </div>
-
-            <div class="flex flex-1 justify-center sm:justify-end space-x-1">
-                <button
-                    @click="activeTab = 'writing'"
-                    :class="activeTab === 'writing' ? 'bg-[#2a2a2a] text-white shadow-sm ring-1 ring-white/5' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'"
-                    class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200"
+    <main id="content" tabindex="-1" class="mx-auto max-w-5xl scroll-mt-20 px-5 pb-24 outline-none sm:px-8">
+        <section class="rise grid items-center gap-8 py-12 sm:grid-cols-[auto_1fr] sm:py-20" aria-labelledby="intro-heading">
+            <img
+                src="{{ $profile['photo'] }}"
+                alt="{{ $profile['photo_alt'] }}"
+                width="640"
+                height="640"
+                class="h-28 w-28 rounded-2xl object-cover ring-1 ring-white/15 shadow-[0_0_48px_rgba(246,196,83,0.18)] sm:h-40 sm:w-40"
+            >
+            <div>
+                <p class="text-xs uppercase tracking-[0.18em] text-glow">{{ $profile['role'] }}</p>
+                <h1 id="intro-heading" class="mt-3 text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                    {{ $profile['name'] }}
+                </h1>
+                <p class="mt-4 max-w-xl text-base leading-relaxed text-mist sm:text-lg">
+                    {{ $profile['tagline'] }}
+                    <span class="text-faint">{{ $profile['location'] }}.</span>
+                </p>
+                <a
+                    href="{{ $profile['newsletter']['href'] }}"
+                    class="mt-6 inline-flex min-h-11 items-center rounded-full bg-glow px-4 text-sm font-medium text-ink outline-none hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
-                    Writing
-                </button>
-                <button
-                    @click="activeTab = 'speaking'"
-                    :class="activeTab === 'speaking' ? 'bg-[#2a2a2a] text-white shadow-sm ring-1 ring-white/5' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'"
-                    class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200"
-                >
-                    Speaking
-                </button>
-                <button
-                    @click="activeTab = 'streaming'"
-                    :class="activeTab === 'streaming' ? 'bg-[#2a2a2a] text-white shadow-sm ring-1 ring-white/5' : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5'"
-                    class="px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200"
-                >
-                    Streaming
-                </button>
-            </div>
-        </div>
-
-        <div class="p-6 bg-[#111] h-[400px]">
-
-            <div x-show="activeTab === 'writing'"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-2"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="h-full overflow-y-auto pr-2 custom-scrollbar space-y-6 text-left">
-
-                {{-- STATIC LOCAL POSTS --}}
-                <a href="/fullcircle" class="block group">
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                        The Architecture of a Year: Why I Built FullCircle
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        Time is our only non-renewable resource. I realized that.....
-                    </p>
+                    {{ $profile['newsletter']['cta'] }}
+                    <span class="sr-only">, {{ $profile['newsletter']['title'] }} (opens in a new tab)</span>
                 </a>
-                <a href="/2025blog" class="block group">
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                        Freshman Year: My 2025 Debut in Tech
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        People say a long career in film prepares you for a lot...
-                    </p>
-                </a>
-                <a href="/santatracker" class="block group">
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                        Building Holiday Magic with AI: The 2025 Santa Tracker
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        Resurrecting a family tradition with an 8-bit Santa Tracker powered by real-time AI voice orchestration.
-                    </p>
-                </a>
-
-                <div class="h-px bg-white/5 w-full"></div>
-                <a href="/aiblog" class="block group">
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                        The Tech Conference That Wasn't Selling Anything
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        Reflections on community over commerce and why the best events feel less like sales pitches.
-                    </p>
-                </a>
-
-                <div class="h-px bg-white/5 w-full"></div>
-
-                <a href="/tutorial" class="block group">
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                        How I built this portfolio
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        A look under the hood of this site using Laravel, Tailwind, and a minimal design philosophy.
-                    </p>
-                </a>
-
-                <div class="h-px bg-white/10 w-full"></div>
-
-                {{-- 1. HASHNODE DYNAMIC POSTS --}}
-                @if(isset($posts) && count($posts) > 0)
-                    @foreach($posts as $edge)
-                        @php $post = $edge['node']; @endphp
-
-                        <a href="/blog/{{ $post['slug'] }}" class="block group">
-                            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                                {{ $post['title'] }}
-                            </h3>
-                            <p class="text-zinc-500 mt-2 text-sm leading-relaxed line-clamp-2">
-                                {{ $post['brief'] }}
-                            </p>
-                            <p class="text-xs text-zinc-600 mt-2">
-                                {{ \Carbon\Carbon::parse($post['publishedAt'])->format('M d, Y') }}
-                            </p>
-                        </a>
-                        <div class="h-px bg-white/10 w-full"></div>
+                <ul class="mt-4 flex flex-wrap gap-2">
+                    @foreach ($profile['links'] as $link)
+                        <li>
+                            <a
+                                href="{{ $link['href'] }}"
+                                class="inline-flex min-h-11 items-center rounded-full border border-white/15 px-3.5 text-sm text-mist outline-none hover:border-glow/60 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow"
+                                @if (str_starts_with($link['href'], 'http')) target="_blank" rel="me noopener noreferrer" @endif
+                            >
+                                {{ $link['label'] }}
+                                @if (str_starts_with($link['href'], 'http'))
+                                    <span class="sr-only"> (opens in a new tab)</span>
+                                @endif
+                            </a>
+                        </li>
                     @endforeach
-                @endif
+                </ul>
+            </div>
+        </section>
 
-                {{-- 2. LINKEDIN NEWSLETTER DYNAMIC POSTS --}}
-                @if(isset($linkedinPosts) && count($linkedinPosts) > 0)
-                    <div class="pt-4 mb-2">
-                        <h4 class="text-[10px] font-bold text-indigo-500 uppercase tracking-widest opacity-50">LinkedIn: Musings of an Idiot</h4>
-                    </div>
-
-                    @foreach($linkedinPosts as $article)
-                        <a href="{{ $article['link'] }}" target="_blank" class="block group">
-                            <h3 class="text-lg font-bold text-zinc-100 group-hover:text-indigo-400 transition-colors">
-                                {{ $article['title'] }}
-                            </h3>
-                            <p class="text-zinc-500 mt-2 text-sm leading-relaxed line-clamp-2">
-                                {{ strip_tags($article['brief']) }}
-                            </p>
-                            <div class="flex items-center space-x-3 mt-2">
-                                <p class="text-xs text-zinc-600">
-                                    {{ \Carbon\Carbon::parse($article['date'])->format('M d, Y') }}
-                                </p>
-                                <span class="text-[9px] text-zinc-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/10">Newsletter</span>
+        <section id="featured" class="rise scroll-mt-24" aria-labelledby="featured-heading" style="animation-delay: 70ms">
+            <div class="flex items-baseline gap-4">
+                <span class="text-xs text-glow" aria-hidden="true">01</span>
+                <div>
+                    <h2 id="featured-heading" class="text-2xl font-semibold text-white sm:text-3xl">Featured</h2>
+                    <p class="mt-2 text-sm text-faint">Five appearances worth starting with.</p>
+                </div>
+            </div>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                @foreach ($featured as $item)
+                    <li>
+                        <a
+                            href="{{ $item['href'] }}"
+                            class="entry-link card-lift group block h-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 outline-none hover:border-glow/45 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow"
+                            @if (str_starts_with($item['href'], 'http')) target="_blank" rel="noopener noreferrer" @endif
+                        >
+                            <div class="flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.14em]">
+                                <span class="text-glow">{{ $item['role'] ?? 'Featured' }}</span>
+                                <time datetime="{{ $item['date'] }}">{{ $item['date_label'] }}</time>
                             </div>
+                            <h3 class="mt-3 text-lg font-medium leading-snug text-white">{{ $item['title'] }}</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-mist">{{ $item['source'] }}</p>
+                            @if (! empty($item['summary']))
+                                <p class="mt-2 text-sm leading-relaxed text-faint">{{ $item['summary'] }}</p>
+                            @endif
+                            @if (str_starts_with($item['href'], 'http'))
+                                <span class="sr-only"> (opens in a new tab)</span>
+                            @endif
                         </a>
-                        <div class="h-px bg-white/10 w-full my-4 last:hidden"></div>
-                    @endforeach
-                @endif
+                    </li>
+                @endforeach
+            </ul>
+        </section>
 
+        <section id="talks" class="mt-16 scroll-mt-24 sm:mt-24" aria-labelledby="talks-heading">
+            <div class="flex items-baseline gap-4">
+                <span class="text-xs text-glow" aria-hidden="true">02</span>
+                <div>
+                    <h2 id="talks-heading" class="text-2xl font-semibold text-white sm:text-3xl">Talks &amp; Appearances</h2>
+                    <p class="mt-2 text-sm text-faint">Newest first. {{ count($talks) }} listed.</p>
+                </div>
             </div>
+            @include('partials.entries', ['items' => $talks])
+        </section>
 
-            <div x-show="activeTab === 'speaking'"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-2"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 style="display: none;"
-                 class="h-full overflow-y-auto pr-2 custom-scrollbar text-left">
-
-                <a href="https://m.youtube.com/watch?v=1WzKujMoyM4" class="block group">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider border border-purple-500/20 bg-purple-500/10 px-2 py-1 rounded">Magnolia Conf 2025</span>
+        <section id="writing" class="mt-16 scroll-mt-24 sm:mt-24" aria-labelledby="writing-heading">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div class="flex items-baseline gap-4">
+                    <span class="text-xs text-glow" aria-hidden="true">03</span>
+                    <div>
+                        <h2 id="writing-heading" class="text-2xl font-semibold text-white sm:text-3xl">Writing</h2>
+                        <p class="mt-2 text-sm text-faint">Newest first, starting with the newsletter.</p>
                     </div>
-                    <h3 class="text-lg font-bold text-zinc-100 group-hover:text-purple-400 transition-colors">
-                        The Schematic to Community as told by Rick Astley
-                    </h3>
-                    <p class="text-zinc-500 mt-2 text-sm leading-relaxed">
-                        never giving up never letting down is just the beginning.
-                    </p>
-                </a>
+                </div>
+                <a href="{{ url('/rss') }}" class="rounded-sm text-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow">RSS</a>
+            </div>
+            <a
+                href="{{ $profile['newsletter']['href'] }}"
+                class="card-lift mt-6 flex flex-col gap-4 rounded-2xl border border-glow/40 bg-glow/10 p-5 outline-none hover:border-glow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow sm:flex-row sm:items-center sm:justify-between"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span>
+                    <span class="text-[11px] uppercase tracking-[0.14em] text-glow">Newsletter</span>
+                    <span class="mt-2 block text-xl font-medium text-white">{{ $profile['newsletter']['title'] }}</span>
+                    <span class="mt-2 block text-sm leading-relaxed text-mist">{{ $profile['newsletter']['summary'] }}</span>
+                </span>
+                <span class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full bg-glow px-4 text-sm font-medium text-ink">
+                    {{ $profile['newsletter']['cta'] }}
+                    <span class="sr-only"> (opens in a new tab)</span>
+                </span>
+            </a>
+            @include('partials.entries', ['items' => $writing])
+        </section>
+
+        <section id="videos" class="mt-16 scroll-mt-24 sm:mt-24" aria-labelledby="videos-heading" x-data="{ filter: 'all' }">
+            <div class="flex items-baseline gap-4">
+                <span class="text-xs text-glow" aria-hidden="true">04</span>
+                <div>
+                    <h2 id="videos-heading" class="text-2xl font-semibold text-white sm:text-3xl">Videos &amp; Streams</h2>
+                    <p class="mt-2 text-sm text-faint">Recordings, streams, shorts, and a podcast. Newest first.</p>
+                </div>
             </div>
 
-            <div x-show="activeTab === 'streaming'"
-                 x-transition:enter="transition ease-out duration-300"
-                 x-transition:enter-start="opacity-0 translate-y-2"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 style="display: none;"
-                 class="h-full overflow-y-auto pr-2 custom-scrollbar space-y-4">
-
-                @if(isset($videos) && count($videos) > 0)
-                    @foreach($videos as $video)
-                        <a href="https://www.youtube.com/watch?v={{ $video['snippet']['resourceId']['videoId'] }}"
-                           target="_blank"
-                           class="block group p-4 rounded-xl bg-[#161616] border border-white/5 hover:border-red-500/30 transition-all duration-300">
-
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-2 bg-red-500/10 px-2 py-1 rounded border border-red-500/20">
-                                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
-                                    <span class="text-[10px] font-bold text-red-500 uppercase tracking-wider">
-                                        {{ $video['snippet']['channelTitle'] ?? 'Tech Commute' }}
-                                    </span>
-                                </div>
-
-                                <svg class="w-4 h-4 text-zinc-600 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                </svg>
-                            </div>
-
-                            <h3 class="text-base font-bold text-zinc-100 group-hover:text-red-400 transition-colors">
-                                {{ html_entity_decode($video['snippet']['title']) }}
-                            </h3>
-
-                            <p class="text-zinc-500 mt-2 text-sm leading-relaxed line-clamp-2">
-                                {{ $video['snippet']['description'] }}
-                            </p>
-                        </a>
-                    @endforeach
-                @else
-                    <div class="p-8 text-center border border-white/5 rounded-xl bg-[#161616]">
-                        <p class="text-zinc-500 text-sm">Loading streams...</p>
-                    </div>
-                @endif
-
+            <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filter videos">
+                @foreach (['all' => 'All', 'recording' => 'Talks', 'stream' => 'Streams', 'short' => 'Shorts', 'podcast' => 'Podcast'] as $value => $label)
+                    <button
+                        type="button"
+                        class="min-h-11 rounded-full border px-3.5 text-sm outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-glow"
+                        :class="filter === '{{ $value }}' ? 'border-glow/50 bg-glow/15 text-white' : 'border-white/10 text-faint hover:border-white/25 hover:text-white'"
+                        :aria-pressed="filter === '{{ $value }}'"
+                        @click="filter = '{{ $value }}'"
+                    >{{ $label }}</button>
+                @endforeach
             </div>
 
+            <ul class="mt-2 divide-y divide-white/10 border-t border-white/10">
+                @foreach ($videos as $item)
+                    <li x-show="filter === 'all' || filter === '{{ $item['kind'] }}' || (filter === 'stream' && '{{ $item['kind'] }}' === 'upcoming')">
+                        @include('partials.entry', ['item' => $item])
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/10">
+        <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 text-sm text-faint sm:flex-row sm:items-center sm:justify-between sm:px-8">
+            <p>&copy; {{ date('Y') }} Jason Torres.</p>
+            <ul class="flex flex-wrap gap-x-5 gap-y-2">
+                @foreach ($profile['also'] as $link)
+                    <li>
+                        <a
+                            href="{{ $link['href'] }}"
+                            class="rounded-sm text-faint outline-none hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-glow"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >{{ $link['label'] }}<span class="sr-only"> (opens in a new tab)</span></a>
+                    </li>
+                @endforeach
+            </ul>
         </div>
-    </div>
-
-</main>
-
-
-<footer class=" bottom-6 w-full text-center z-0 pointer-events-none">
-    <div class="flex flex-col items-center space-y-2">
-        <p class="text-zinc-700 text-xs">&copy; {{ date('Y') }} Jason Torres.</p>
-    </div>
-</footer>
-
+    </footer>
 </body>
 </html>
