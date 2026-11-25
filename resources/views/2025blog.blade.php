@@ -4,9 +4,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>From Film Sets to Tech Communities: My Debut Year | Jason Torres</title>
-    <link rel="preconnect" href="https://fonts.bunny.net"/>
-    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet"/>
+    @include('partials.fonts')
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>body.font-sans { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }</style>
 </head>
 <body
     class="antialiased bg-[#050505] text-gray-300 font-sans min-h-screen selection:bg-indigo-500 selection:text-white">
