@@ -23,6 +23,10 @@ class ExampleTest extends TestCase
         $response->assertSee('2:00–8:00 PM ET');
         $response->assertSee('9:40 AM');
         $response->assertSee('jetbrains-mono');
+        $response->assertSee('localStorage.getItem');
+        $response->assertSee('prefers-color-scheme');
+        $response->assertSee('id="theme-toggle"', false);
+        $response->assertSee('Switch to');
         $response->assertSee('Read the newsletter');
         $response->assertSee('Musings of an Idiot');
         $response->assertSee('musings-of-an-idiot-7414020052481413120');

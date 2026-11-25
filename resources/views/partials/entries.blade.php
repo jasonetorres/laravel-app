@@ -1,4 +1,4 @@
-<ul class="mt-4 divide-y divide-white/10 border-t border-white/10">
+<ul class="mt-4 divide-y divide-line border-t border-line">
     @foreach ($items as $item)
         <li>
             @include('partials.entry', ['item' => $item])

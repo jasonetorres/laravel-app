@@ -12,7 +12,7 @@
         @endif
     </div>
     <div>
-        <h3 class="text-base font-medium leading-normal text-white">{{ $item['title'] }}</h3>
+        <h3 class="text-base font-medium leading-normal text-fg">{{ $item['title'] }}</h3>
         <p class="mt-1 text-sm leading-relaxed text-mist">
             {{ $item['source'] }}
             @if (! empty($item['summary']))
